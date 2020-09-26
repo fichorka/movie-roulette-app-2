@@ -73,5 +73,5 @@ interface MovieListResultObject {
   title: string
   popularity: number
   vote_count: number
-  vote_average: popularity
+  vote_average: number
 }
