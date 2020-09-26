@@ -1,5 +1,5 @@
 import { API_BASE_URL, API_KEY } from '../../config'
-import { MovieListResultObject } from './types'
+import { MovieListResponse, MovieListResultObject } from './types'
 
 const urlEndpoint = API_BASE_URL + `discover/movie?api_key=${API_KEY}`
 
@@ -24,7 +24,7 @@ const fetchMovieList: FetchMovieList = async function ({
     `&page=${page}`
   return await fetch(requestUrl)
     .then((res) => res.json())
-    .then((res: ApiResponse) => {
+    .then((res: MovieListResponse) => {
       if (!res.results) throw new Error()
       return res.results
     })
@@ -54,11 +54,4 @@ interface Props {
     | 'original_title'
   sortOrder?: 'asc' | 'desc'
   page?: number
-}
-
-interface ApiResponse {
-  page: number
-  total_results: number
-  total_pages: number
-  results: any[]
 }

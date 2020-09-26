@@ -17,4 +17,11 @@ interface Genre {
   name: string
 }
 
+export interface MovieListResponse {
+  page: number
+  total_results: number
+  total_pages: number
+  results: MovieListResultObject[]
+}
+
 export { MovieListResultObject, Genre }
