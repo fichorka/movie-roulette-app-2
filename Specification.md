@@ -38,6 +38,8 @@ route: `/:id/`
 
 ### UserProfile page
 
+route: `/profile`
+
 - Show a list of rated movies
 - User can delete the rating
 - User can click on the movie and go to MovieDetails page
