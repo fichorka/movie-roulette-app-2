@@ -1,4 +1,5 @@
 import { API_BASE_URL, API_KEY } from '../../config'
+import { Genre } from './types'
 
 const endpointUrl =
   API_BASE_URL + `genre/movie/list?api_key=${API_KEY}&language=en-US`
@@ -21,9 +22,4 @@ type FetchGenres = () => Promise<Genre[]>
 
 interface ApiResponse {
   genres: Genre[]
-}
-
-interface Genre {
-  id: number
-  name: string
 }
