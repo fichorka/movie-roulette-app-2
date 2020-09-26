@@ -21,7 +21,15 @@ const fetchMovieList: FetchMovieList = async function ({
     (withoutGenres.length ? `&without_genres=${withoutGenres.join(',')}` : '') +
     `&sort_by=${sortBy}.${sortOrder}` +
     `&page=${page}`
-  return await fetch(requestUrl).then((res) => res.json())
+  return await fetch(requestUrl)
+    .then((res) => res.json())
+    .then((res) => {
+      if (!res.results) throw new Error()
+      return res.results
+    })
+    .catch(() => {
+      throw new Error('Failed to fetch a movie list.')
+    })
 }
 
 export { fetchMovieList }
@@ -44,8 +52,7 @@ interface Props {
     | 'vote_count'
     | 'original_title'
   sortOrder?: 'asc' | 'desc'
-
-  page: number
+  page?: number
 }
 
 interface ApiResponse {

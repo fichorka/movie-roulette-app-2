@@ -6,7 +6,10 @@ const endpointUrl =
 const fetchGenres: FetchGenres = async function () {
   return await fetch(endpointUrl)
     .then((res) => res.json())
-    .then((data) => data.genres)
+    .then((data) => {
+      if (!data.genres) throw new Error()
+      return data.genres
+    })
     .catch(() => {
       throw new Error('Failed to fetch the genre list.')
     })
