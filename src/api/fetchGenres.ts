@@ -6,7 +6,7 @@ const endpointUrl =
 const fetchGenres: FetchGenres = async function () {
   return await fetch(endpointUrl)
     .then((res) => res.json())
-    .then((data) => {
+    .then((data: ApiResponse) => {
       if (!data.genres) throw new Error()
       return data.genres
     })
@@ -18,6 +18,10 @@ const fetchGenres: FetchGenres = async function () {
 export { fetchGenres }
 
 type FetchGenres = () => Promise<Genre[]>
+
+interface ApiResponse {
+  genres: Genre[]
+}
 
 interface Genre {
   id: number
