@@ -4,12 +4,16 @@ const urlEndpoint = `${API_BASE_URL}movie/`
 
 ;('https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=ed183a97f2ed86e8d5f403f1d25abc0a')
 
-const rateMovie: RateMovie = async function ({ id, guest_session_id }) {
+const rateMovie: RateMovie = async function ({ id, guest_session_id, rating }) {
   const requestUrl = `${urlEndpoint}${id}/rating?api_key=${API_KEY}&guest_session_id=${guest_session_id}`
   return await fetch(requestUrl, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
-    }
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      value: rating
+    })
   })
     .then(() => true)
     .catch(() => false)
