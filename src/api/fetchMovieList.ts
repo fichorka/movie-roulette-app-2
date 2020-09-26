@@ -1,4 +1,5 @@
 import { API_BASE_URL, API_KEY } from '../../config'
+import { MovieListResultObject } from './types'
 
 const urlEndpoint = API_BASE_URL + `discover/movie?api_key=${API_KEY}`
 
@@ -60,18 +61,4 @@ interface ApiResponse {
   total_results: number
   total_pages: number
   results: any[]
-}
-
-interface MovieListResultObject {
-  id: number
-  poster_path: string | null
-  backdrop_path: string | null
-  release_date: string
-  genre_ids: number[]
-  original_title: string
-  original_language: string
-  title: string
-  popularity: number
-  vote_count: number
-  vote_average: number
 }

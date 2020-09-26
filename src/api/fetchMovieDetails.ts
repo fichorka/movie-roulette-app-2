@@ -1,8 +1,8 @@
 import { API_BASE_URL, API_KEY } from '../../config'
-import { Genre } from './types'
+import { Genre, MovieListResultObject } from './types'
 
 const urlEndpoint = `${API_BASE_URL}movie/`
-const essentialQueryParams = `api_key=${API_KEY}&language=en-US&append_to_response=videos`
+const essentialQueryParams = `api_key=${API_KEY}&language=en-US&append_to_response=videos,credits,recommendations`
 
 const fetchMovieDetails: FetchMovieDetails = async function ({ id }) {
   const requestUrl = urlEndpoint + `${id}` + '?' + essentialQueryParams
@@ -31,6 +31,8 @@ interface MovieDetailsApi {
   vote_average?: number
   vote_count?: number
   videos?: VideoResponseApi
+  credits: Credits
+  recommendations?: { results: MovieListResultObject[] }
 }
 
 interface VideoResponseApi {
@@ -38,4 +40,12 @@ interface VideoResponseApi {
     key?: string
     site?: string
   }>
+}
+
+interface Credits {
+  cast: {
+    name: string
+    character: string
+    order: number
+  }[]
 }
