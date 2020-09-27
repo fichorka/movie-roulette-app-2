@@ -22,7 +22,7 @@ route: `/?genres[]=:genreId&genre[]=:genreId&genre_behavior=includes|without` _(
 - List Movies, show load/error indication
 - Display filter and sort settings at the top
 - User can remove selected genres from filter by clicking 'x' near the label of each genre name
-- Available sort settings through dropdown menu: title (default), popularity, release date, rating, vote count, and thee order: asc \ desc
+- Available sort settings through dropdown menu: title, popularity(default), release date, rating, vote count, and thee order: asc \ desc(default)
 - LOAD button loads more movies
 - use url query parameters for filter and sort settings
 
