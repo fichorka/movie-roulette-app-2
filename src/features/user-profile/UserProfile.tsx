@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { StoreContext } from '../../store/StoreContext'
 
 const UserProfile: React.FC = () => {
+  const { state, dispatch } = useContext(StoreContext)
+
+  useEffect(() => {
+    dispatch({ type: 'navigation', payload: 'userProfile' })
+  }, [state.curPage])
+
   return (
     <div>
       <Link to="/">Back</Link>
