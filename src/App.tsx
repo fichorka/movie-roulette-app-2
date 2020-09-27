@@ -1,10 +1,23 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { MovieDetails } from './features/movie-details'
+import { MovieList } from './features/movie-list'
+import { UserProfile } from './features/user-profile'
 
 export const App: React.FC = () => {
-  // fetchGenres().then((res) => console.log(res))
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/profile">
+          <UserProfile />
+        </Route>
+        <Route path="/:id">
+          <MovieDetails />
+        </Route>
+        <Route path="/">
+          <MovieList />
+        </Route>
+      </Switch>
+    </Router>
   )
 }

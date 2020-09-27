@@ -9,7 +9,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dev_build')
   },
   devServer: {
-    contentBase: './dev_build',
+    contentBase: path.join(__dirname, 'dev_build'),
+    historyApiFallback: true,
     open: true
   },
   plugins: [
