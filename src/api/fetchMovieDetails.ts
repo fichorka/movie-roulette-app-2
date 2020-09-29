@@ -14,7 +14,7 @@ export { fetchMovieDetails }
 
 type FetchMovieDetails = ({ id }: { id: number }) => Promise<MovieDetailsApi>
 
-interface MovieDetailsApi {
+export interface MovieDetailsApi {
   backdrop_path?: string | null
   genres?: Genre[]
   homepage?: string | null

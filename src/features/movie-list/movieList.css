@@ -1,0 +1,238 @@
+@media (min-aspect-ratio: 4/5) {
+  .modal.modal {
+    width: 20rem;
+    height: 26rem;
+  }
+}
+
+.modal-container {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  position: absolute;
+  width: 90%;
+  max-height: 90%;
+  border-radius: 0.5rem;
+  background: var(--bg-3);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.modal__control {
+  text-align: right;
+  border-bottom: 0.1rem solid #999;
+  position: relative;
+  line-height: 3rem;
+  background: var(--bg-2);
+}
+
+.modal__title-bar {
+  text-align: left;
+  position: absolute;
+  left: 0;
+  padding: 0 1rem;
+  user-select: none;
+}
+
+.modal__close-btn {
+  padding: 0 1.5rem;
+  user-select: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.modal__close-btn:hover {
+  background: #999;
+}
+
+.modal__x-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  border-bottom: 0.1rem solid #999;
+}
+
+.modal__tab {
+  min-width: 7rem;
+  line-height: 2rem;
+  width: 50%;
+  max-width: 50%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  display: inline-block;
+  user-select: none;
+}
+
+.modal__tab.active {
+  background: #c0cfff;
+  box-shadow: inset 0 0 0.2rem 0 #222;
+}
+
+.modal__body {
+  overflow-y: auto;
+  /* height: calc(100% - 1.5rem); */
+}
+
+.modal__item {
+  margin: 0.3rem 1rem;
+  line-height: 2.2rem;
+  box-sizing: border-box;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  background: var(--bg-1);
+  box-sizing: border-box;
+}
+
+.modal__item:first-child {
+  margin-top: 1rem;
+}
+
+.modal__item:last-child {
+  margin-bottom: 1rem;
+}
+
+.modal__item.modal__item:hover {
+  filter: brightness(1.1);
+}
+
+.modal__item.yes {
+  background: var(--bg-on);
+  border: 0.1rem solid var(--col-on);
+  line-height: 2rem;
+}
+.modal__item.yes .modal__item__name {
+  color: var(--col-on);
+}
+
+.modal__item.no {
+  background: var(--bg-off);
+  border: 0.1rem solid var(--col-off);
+  line-height: 2rem;
+}
+.modal__item.no .modal__item__name {
+  color: var(--col-off);
+}
+
+.modal__item > div {
+  display: inline-block;
+  padding: 0 1rem;
+}
+
+.modal__item__name {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.modal__item__no,
+.modal__item__yes {
+  width: 1.8rem;
+}
+
+.modal__item__yes {
+  /* background: var(--bg-2); */
+  color: darkblue;
+  cursor: pointer;
+}
+.modal__item__yes:hover {
+  background: var(--bg-on);
+  color: blue !important;
+}
+.yes > .modal__item__yes {
+  color: blue;
+  font-weight: bold;
+}
+
+.modal__item__no {
+  /* background: rgba(200, 50, 50, 0.2); */
+  color: darkred;
+  cursor: pointer;
+}
+.modal__item__no:hover {
+  background: var(--bg-off);
+  color: darkred;
+}
+.no > .modal__item__no {
+  color: var(--col-off);
+  font-weight: bold;
+  /* box-shadow: inset 0 0 0.2rem 0 black; */
+}
+
+.modal__submit-btn {
+  line-height: 3rem;
+  font-size: 1.2rem;
+  background: #333;
+  color: #eee;
+  text-align: center;
+  cursor: pointer;
+}
+
+.modal__submit-btn:hover {
+  background: #111;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.card {
+  position: relative;
+  background: var(--bg-2);
+  margin: 3rem;
+  border-radius: 0.3rem;
+  width: 16rem;
+}
+
+.card__rating {
+  position: absolute;
+  right: -1em;
+  top: -1em;
+  line-height: 3em;
+  background: var(--bg-3);
+  width: 3em;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  user-select: none;
+  box-shadow: 0 0 0.5rem -0.1rem var(--shadow);
+}
+
+.card__image-container {
+  width: 14rem;
+  height: 16rem;
+  margin: 1rem;
+  background: var(--bg-3);
+}
+
+.card__poster-image {
+  text-align: center;
+  height: 16rem;
+  display: block;
+}
+
+.card__label {
+  margin: 1rem 1rem 0.5rem 1rem;
+  font-size: 1.2rem;
+}
+
+.card__sub-label {
+  margin: 0.5rem 1rem 1rem 1rem;
+}

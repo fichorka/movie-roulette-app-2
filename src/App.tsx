@@ -1,44 +1,34 @@
-import React, { useReducer } from 'react'
-import { useQuery } from 'react-query'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { fetchMovieList } from './api'
 import { MovieDetails } from './features/movie-details'
-import { MovieList } from './features/movie-list'
+import { fetchAllGenres, MovieList, selectGenres } from './features/movie-list'
 import { UserProfile } from './features/user-profile'
-import { rootReducer } from './store'
-import { StoreContext } from './store/StoreContext'
+import { AppDispatch } from './store'
+import { useDispatch, useSelector } from 'react-redux'
+import './App.css'
 
 export const App: React.FC = () => {
-  // create store
-  const [state, dispatch] = useReducer(rootReducer, {})
+  const dispatch: AppDispatch = useDispatch()
+  const genres = useSelector(selectGenres)
 
-  // movieList query
-  const { isLoading, isError, data } = useQuery(
-    [{ sortOrder: 'asc' }],
-    fetchMovieList,
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-      enabled: state.curPage === 'movieList'
-    }
-  )
+  useEffect(() => {
+    // custom Hook for fetching genres initially
+    if (!genres.length) dispatch(fetchAllGenres())
+  }, [genres])
 
   return (
-    <StoreContext.Provider value={{ state, dispatch }}>
-      <Router>
-        <Switch>
-          <Route exact path="/profile">
-            <UserProfile />
-          </Route>
-          <Route path="/:id">
-            <MovieDetails />
-          </Route>
-          <Route path="/">
-            <MovieList data={data} isLoading={isLoading} isError={isError} />
-          </Route>
-        </Switch>
-      </Router>
-    </StoreContext.Provider>
+    <Router>
+      <Switch>
+        <Route exact path="/profile">
+          <UserProfile />
+        </Route>
+        <Route path="/:id">
+          <MovieDetails />
+        </Route>
+        <Route path="/">
+          <MovieList />
+        </Route>
+      </Switch>
+    </Router>
   )
 }

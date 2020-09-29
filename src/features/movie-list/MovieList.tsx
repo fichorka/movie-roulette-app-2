@@ -1,12 +1,33 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { StoreContext } from '../../store/StoreContext'
+import { MovieFilters } from './MovieFilters'
+import { RouletteModal } from './RouletteModal'
+import './movieList.css'
+import { MovieCard } from './MovieCard'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  fetchMovies,
+  selectMovieListSlice,
+  selectMovies
+} from './movieListSlice'
 
-const MovieList: React.FC<Props> = ({ isLoading, isError, data }: Props) => {
-  const { state, dispatch } = useContext(StoreContext)
+const MovieList: React.FC = () => {
+  const [ModalVisible, setModalVisible] = useState(false)
+
+  const dispatch = useDispatch()
+
+  const movieListSlice = useSelector(selectMovieListSlice)
+
+  const movies = useSelector(selectMovies)
+
+  const { isLoading, isError, isSuccess } = movieListSlice
+
   useEffect(() => {
-    dispatch({ type: 'navigation', payload: 'movieList' })
-  }, [state.curPage])
+    // customHook for initial fetch
+    if (!movies.length && !movieListSlice.isLoading) {
+      dispatch(fetchMovies(movieListSlice.queryOptions))
+    }
+  }, [movies])
 
   return (
     <div>
@@ -17,17 +38,44 @@ const MovieList: React.FC<Props> = ({ isLoading, isError, data }: Props) => {
         <Link to="/profile">Movie profile</Link>
       </div>
       <h1>MovieList page</h1>
-      {isError && <div>Network error...</div>}
-      {isLoading && <div>Loadding...</div>}
-      {data && data.map((movie) => <div key={movie.id}>{movie.title}</div>)}
+      <button onClick={() => setModalVisible(!ModalVisible)}>
+        Toggle Modal
+      </button>
+      <MovieFilters />
+      <div className="movie-list">
+        {movies &&
+          movies.map((m) => (
+            <MovieCard
+              key={m.id}
+              title={m.title}
+              imageUrl={m.poster_path}
+              release_date={m.release_date}
+              language={m.original_language}
+              rating={m.vote_average}
+            />
+          ))}
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Network error...</div>}
+        <button
+          onClick={() => {
+            if (isSuccess) {
+              dispatch({ type: 'movieList/loadMore' })
+              dispatch(fetchMovies(movieListSlice.queryOptions))
+            }
+          }}
+        >
+          Load more
+        </button>
+        {ModalVisible && (
+          <RouletteModal
+            closeModal={() => {
+              setModalVisible(false)
+            }}
+          />
+        )}
+      </div>
     </div>
   )
 }
 
 export { MovieList }
-
-interface Props {
-  isLoading: boolean
-  isError: boolean
-  data: any[]
-}

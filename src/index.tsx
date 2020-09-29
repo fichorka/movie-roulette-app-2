@@ -2,22 +2,12 @@ import '@babel/polyfill'
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { App } from './App'
-import { QueryCache, ReactQueryCacheProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query-devtools'
-
-const queryCache = new QueryCache({
-  defaultConfig: {
-    queries: {
-      staleTime: 10000
-    }
-  }
-})
+import { store } from './store'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
-  <ReactQueryCacheProvider queryCache={queryCache}>
+  <Provider store={store}>
     <App />
-    <ReactQueryDevtools initialIsOpen={false} />
-  </ReactQueryCacheProvider>,
-
+  </Provider>,
   document.getElementById('root')
 )

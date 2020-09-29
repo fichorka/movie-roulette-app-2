@@ -1,0 +1,26 @@
+@media (min-aspect-ratio: 4/5) {
+  :root:root {
+    font-size: 2vh;
+  }
+}
+
+:root {
+  font-size: 3.5vw;
+  font-family: system-ui, Arial, sans-serif;
+
+  /* custom propeties */
+  --bg-1: #f8f8f8;
+  --bg-2: #e0e0e0;
+  --bg-3: #c8c8c8;
+  --text-col: #121212;
+  --shadow: #404040;
+  --bg-on: rgb(235, 235, 256);
+  --bg-off: rgb(256, 235, 235);
+  --col-on: blue;
+  --col-off: rgb(220, 0, 0);
+}
+
+body {
+  color: var(--text-col);
+  background: var(--bg-1);
+}

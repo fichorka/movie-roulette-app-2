@@ -1,4 +1,4 @@
-interface MovieListResultObject {
+export interface MovieListResultObject {
   id: number
   poster_path: string | null
   backdrop_path: string | null
@@ -15,6 +15,8 @@ interface MovieListResultObject {
 interface Genre {
   id: number
   name: string
+  included: boolean
+  excluded: boolean
 }
 
 export interface MovieListResponse {
