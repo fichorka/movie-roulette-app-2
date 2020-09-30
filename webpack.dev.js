@@ -26,8 +26,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.svg$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'file-loader'
+        }
+      },
+      {
         test: /\.tsx?|jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
           options: {

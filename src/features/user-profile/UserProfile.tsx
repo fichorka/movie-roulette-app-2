@@ -3,26 +3,24 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { MovieCard } from '../movie-list/MovieCard'
 import { selectSession } from '../other'
+import './userProfile.css'
 
 const UserProfile: React.FC = () => {
   const { ratedMovies } = useSelector(selectSession)
   return (
     <div>
-      <Link to="/">Back</Link>
-      <h1>UserProfile page</h1>
-      <div>Rated movies</div>
-      <div className="movile-list">
+      <Link to="/" className="nav-btn">
+        {'<'} back
+      </Link>
+      <h1 className="page-title">My movies</h1>
+      <div className="page-meta">
+        {ratedMovies.length ? ratedMovies.length : 'No'}{' '}
+        {ratedMovies.length === 1 ? 'movie' : 'movies'} rated{' '}
+        {!ratedMovies.length && 'yet'}
+      </div>
+      <div className="movie-list">
         {ratedMovies &&
-          ratedMovies.map((m) => (
-            <MovieCard
-              key={m.id}
-              title={m.title}
-              imageUrl={m.poster_path}
-              release_date={m.release_date}
-              language={m.original_language}
-              rating={m.vote_average}
-            />
-          ))}
+          ratedMovies.map((m) => <MovieCard key={m.id} movie={m} />)}
       </div>
     </div>
   )

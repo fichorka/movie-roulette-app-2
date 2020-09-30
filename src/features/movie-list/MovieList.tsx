@@ -33,23 +33,17 @@ const MovieList: React.FC = () => {
 
   return (
     <div>
-      <div>
-        <Link to="/236">Movie details</Link>
-      </div>
-      <div>
-        <Link to="/profile">Movie profile</Link>
-      </div>
-      <h1>MovieList page</h1>
-      <button onClick={() => setModalVisible(!ModalVisible)}>
-        Toggle Modal
-      </button>
+      <button
+        className="float-btn float-btn--modal"
+        onClick={() => setModalVisible(!ModalVisible)}
+      ></button>
       <MovieFilters />
       <div className="movie-list">
         {targetList &&
           targetList.map((m, i) => <MovieCard key={i} movie={m} />)}
       </div>
       <button
-        className="load-more-btn"
+        className="float-btn"
         disabled={isLoading}
         onClick={() => {
           if (!isLoading) {

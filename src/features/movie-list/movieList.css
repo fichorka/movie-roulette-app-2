@@ -9,6 +9,16 @@
   }
 }
 
+.sort-order-option {
+  background: var(--bg-1);
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  margin: 1rem;
+}
+
 .modal-container {
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
@@ -236,7 +246,7 @@
   width: 14rem;
   height: 16rem;
   margin: 1rem;
-
+  background: var(--bg-3);
   position: relative;
   overflow: hidden;
 }
@@ -290,32 +300,48 @@
   opacity: 0;
 }
 
-.load-more-btn {
-  font-size: 1.2rem;
+.float-btn {
+  font-size: 1rem;
   border: 0.2em solid var(--border-col);
   box-sizing: border-box;
   outline: none;
   display: block;
   color: var(--text-col-2);
-  width: 6em;
-  height: 6em;
-  line-height: 5.6em;
+  width: 4.8em;
+  height: 4.8em;
+  line-height: 4.4em;
   text-align: center;
   margin: 2em auto;
   user-select: none;
   border-radius: 50%;
   background: var(--bg-2);
 }
-.load-more-btn:disabled {
+.float-btn:disabled {
   color: var(--text-col-3);
 }
 
-.load-more-btn:focus,
-.load-more-btn:hover {
+.float-btn:focus,
+.float-btn:hover {
   border: 0.2em solid var(--focus-border-col);
 }
 
-.load-more-btn:active {
+.float-btn:active {
   border: 0.3em solid var(--active-border-col);
-  line-height: 5.4em;
+  line-height: 4.2em;
+}
+
+.float-btn.float-btn--modal {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 1rem;
+  color: var(--text-col-light);
+  background: url('../../assets/shuffle.svg') no-repeat center;
+  background-color: var(--bg-dark-1);
+  background-size: 40%;
+  z-index: 11;
+}
+
+path {
+  fill: white;
 }

@@ -55,7 +55,6 @@ export interface FetchMovieListProps {
     | 'popularity'
     | 'vote_average'
     | 'release_date'
-    | 'rating'
     | 'vote_count'
     | 'original_title'
   sortOrder?: 'asc' | 'desc'

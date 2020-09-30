@@ -12,9 +12,11 @@
   --bg-1: #f8f8f8;
   --bg-2: #e0e0e0;
   --bg-3: #c8c8c8;
+  --bg-dark-1: #404040;
   --text-col: #121212;
   --text-col-2: #484848;
   --text-col-3: #808080;
+  --text-col-light: #e0e0e0;
   --shadow: #404040;
   --bg-on: rgb(235, 235, 256);
   --bg-off: rgb(256, 235, 235);
@@ -26,6 +28,77 @@
 }
 
 body {
+  margin: 0;
   color: var(--text-col);
   background: var(--bg-2);
+}
+
+.nav-bar {
+  background: var(--bg-1);
+}
+
+.nav-title {
+  font-size: 1rem;
+  line-height: 3rem;
+  margin: 0 1rem;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  color: var(--text-col-3);
+  font-weight: bold;
+}
+
+.profile-icon {
+  background-image: url('./assets/user.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-btn {
+  display: inline-block;
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  right: 0;
+  padding: 0.5rem 1rem;
+}
+
+.profile-btn:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn {
+  display: inline-block;
+  /* margin-top: 1rem; */
+  line-height: 3rem;
+  padding: 0 2rem 0 1.8rem;
+  background: var(--bg-3);
+  text-decoration: none;
+  color: var(--col-text);
+}
+
+.nav-btn:hover {
+  filter: brightness(0.9);
+}
+
+.page-title {
+  font-size: 1.2rem;
+  line-height: 3rem;
+  margin: 0 1rem 0;
+  display: inline-block;
+}
+
+.page-meta {
+  margin: 0.5rem 1rem;
+}
+
+@keyframes loading {
+  from {
+    filter: brightness(0.9);
+  }
+  to {
+    filter: brightness(1.1);
+  }
 }

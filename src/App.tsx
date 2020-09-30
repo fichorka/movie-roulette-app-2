@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
 import { selectSession } from './features/other'
 import { useSession } from './custom-hooks'
+import { Navbar } from './Navbar'
 
 export const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -23,6 +24,7 @@ export const App: React.FC = () => {
 
   return (
     <Router>
+      <Navbar />
       <Switch>
         <Route exact path="/profile">
           <UserProfile />
