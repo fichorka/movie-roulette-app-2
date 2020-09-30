@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { movieListReducer } from '../features/movie-list'
+import { sessionReducer } from '../features/other'
 
 const store = configureStore({
   reducer: {
-    movieList: movieListReducer
+    movieList: movieListReducer,
+    session: sessionReducer
   }
 })
 

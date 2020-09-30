@@ -6,15 +6,20 @@ import { UserProfile } from './features/user-profile'
 import { AppDispatch } from './store'
 import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
+import { selectSession } from './features/other'
+import { useSession } from './custom-hooks'
 
 export const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
   const genres = useSelector(selectGenres)
+  const session = useSelector(selectSession)
 
   useEffect(() => {
     // custom Hook for fetching genres initially
     if (!genres.length) dispatch(fetchAllGenres())
   }, [genres])
+
+  useSession(session, dispatch)
 
   return (
     <Router>
