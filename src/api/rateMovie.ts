@@ -21,10 +21,10 @@ const rateMovie: RateMovie = async function ({ movieId, sid, rating }) {
 
 export { rateMovie }
 
-interface Props {
+export interface RateMovieProps {
   movieId: string
   sid: string
   rating: number
 }
 
-type RateMovie = (options: Props) => Promise<boolean>
+type RateMovie = (options: RateMovieProps) => Promise<boolean>

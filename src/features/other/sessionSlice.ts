@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
   fetchNewGuestSessionId,
   fetchRatedMovieList,
-  rateMovie
+  rateMovie,
+  RateMovieProps
 } from '../../api'
 import { RootState } from '../../store'
 
@@ -18,8 +19,8 @@ const fetchRatedMovies = createAsyncThunk(
 )
 
 const rateMovieOnApi = createAsyncThunk(
-  'session/fetchRatedMovies',
-  async ({ movieId, sid, rating }) => {
+  'session/rateMovie',
+  async ({ movieId, sid, rating }: RateMovieProps) => {
     return await rateMovie({ movieId, sid, rating })
   }
 )
@@ -27,41 +28,33 @@ const rateMovieOnApi = createAsyncThunk(
 const initialState = {
   sid: '',
   ratedMovies: [],
-  // sidIsLoading: false,
   sidIsError: false,
-  // isRatedMoviesLoading: false,
-  // isRatedMoviesStale: true,
-  isRatedMoviesError: false
+  isRatedMoviesError: false,
+  isRatedMoviesStale: true
 }
 
 const sessionSlice = createSlice({
   name: 'session',
   initialState,
-  reducers: {
-    movieRated: (state, action) => {
-      state.ratedMovies.push(action.payload)
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSessionId.fulfilled, (state, action) => {
       state.sid = action.payload
       state.sidIsError = false
-      // state.isRatedMoviesStale = true
     })
     builder.addCase(fetchSessionId.rejected, (state) => {
       state.sidIsError = true
     })
     builder.addCase(fetchRatedMovies.fulfilled, (state, action) => {
       state.ratedMovies = action.payload
-      // state.isRatedMoviesStale = false
+      state.isRatedMoviesStale = false
+      state.isRatedMoviesError = false
     })
-    // builder.addCase(fetchRatedMovies.pending, (state) => {
-    //   state.isRatedMoviesLoading = true
-    //   state.isRatedMoviesError = false
-    // })
     builder.addCase(fetchRatedMovies.rejected, (state) => {
-      // state.isRatedMoviesLoading = false
       state.isRatedMoviesError = true
+    })
+    builder.addCase(rateMovieOnApi.fulfilled, (state) => {
+      state.isRatedMoviesStale = true
     })
   }
 })
@@ -70,9 +63,7 @@ export const selectSession: SelectSession = (state: RootState) => state.session
 
 type SelectSession = (state: RootState) => typeof initialState
 
-export { fetchSessionId, fetchRatedMovies }
-
-export const { movieRated } = sessionSlice.actions
+export { fetchSessionId, fetchRatedMovies, rateMovieOnApi }
 
 export const { reducer: sessionReducer } = sessionSlice
 
