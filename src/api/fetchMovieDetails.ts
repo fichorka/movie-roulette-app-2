@@ -4,15 +4,17 @@ import { Genre, MovieListResultObject } from './types'
 const urlEndpoint = `${API_BASE_URL}movie/`
 const essentialQueryParams = `api_key=${API_KEY}&language=en-US&append_to_response=videos,credits,recommendations`
 
-const fetchMovieDetails: FetchMovieDetails = async function ({ id }) {
-  const requestUrl = urlEndpoint + `${id}` + '?' + essentialQueryParams
+const fetchMovieDetails: FetchMovieDetails = async function ({ movieId }) {
+  const requestUrl = urlEndpoint + `${movieId}` + '?' + essentialQueryParams
 
   return await fetch(requestUrl).then((res) => res.json())
 }
 
 export { fetchMovieDetails }
 
-type FetchMovieDetails = ({ id }: { id: number }) => Promise<MovieDetailsApi>
+type FetchMovieDetails = (options: {
+  movieId: string | number
+}) => Promise<MovieDetailsApi>
 
 export interface MovieDetailsApi {
   backdrop_path?: string | null

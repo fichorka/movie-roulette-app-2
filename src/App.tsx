@@ -27,7 +27,7 @@ export const App: React.FC = () => {
         <Route exact path="/profile">
           <UserProfile />
         </Route>
-        <Route path="/:id">
+        <Route path="/:movieId">
           <MovieDetails />
         </Route>
         <Route path="/">

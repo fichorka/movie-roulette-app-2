@@ -47,6 +47,7 @@ const sessionSlice = createSlice({
       state.sid = action.payload
       state.sidIsLoading = false
       state.sidIsError = false
+      state.isRatedMoviesStale = true
     })
     builder.addCase(fetchSessionId.pending, (state) => {
       state.sidIsLoading = true
@@ -59,16 +60,12 @@ const sessionSlice = createSlice({
     builder.addCase(fetchRatedMovies.fulfilled, (state, action) => {
       state.ratedMovies = action.payload
       state.isRatedMoviesStale = false
-      state.isRatedMoviesStale = false
     })
-    builder.addCase(rateMovieOnApi.fulfilled, (state) => {
-      state.isRatedMoviesStale = true
-    })
-    builder.addCase(rateMovieOnApi.pending, (state) => {
+    builder.addCase(fetchRatedMovies.pending, (state) => {
       state.isRatedMoviesLoading = true
       state.isRatedMoviesError = false
     })
-    builder.addCase(rateMovieOnApi.fulfilled, (state) => {
+    builder.addCase(fetchRatedMovies.rejected, (state) => {
       state.isRatedMoviesLoading = false
       state.isRatedMoviesError = true
     })
