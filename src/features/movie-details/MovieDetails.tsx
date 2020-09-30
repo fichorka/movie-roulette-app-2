@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { rateMovieOnApi, selectSession } from '../other'
+import { deleteMovieRatingOnApi, rateMovieOnApi, selectSession } from '../other'
 import { fetchMovie, selectMovie } from './movieDetailsSlice'
 
 const MovieDetails: React.FC = () => {
@@ -27,6 +27,13 @@ const MovieDetails: React.FC = () => {
         }}
       >
         Rate
+      </button>
+      <button
+        onClick={() => {
+          dispatch(deleteMovieRatingOnApi({ movieId, sid }))
+        }}
+      >
+        Remove Rating
       </button>
     </div>
   )

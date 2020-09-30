@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
+  deleteMovieRating,
   fetchNewGuestSessionId,
   fetchRatedMovieList,
   rateMovie,
-  RateMovieProps
+  RateMovieProps,
+  DeleteMovieRatingProps
 } from '../../api'
 import { RootState } from '../../store'
 
@@ -25,18 +27,32 @@ const rateMovieOnApi = createAsyncThunk(
   }
 )
 
+const deleteMovieRatingOnApi = createAsyncThunk(
+  'session/deleteMovieRating',
+  async ({ movieId, sid }: DeleteMovieRatingProps) => {
+    return await deleteMovieRating({ movieId, sid })
+  }
+)
+
 const initialState = {
   sid: '',
   ratedMovies: [],
   sidIsError: false,
   isRatedMoviesError: false,
-  isRatedMoviesStale: true
+  isRatedMoviesStale: true,
+  isLocalStorage: false
 }
 
 const sessionSlice = createSlice({
   name: 'session',
   initialState,
-  reducers: {},
+  reducers: {
+    loadSidFromStorage: (state, action) => {
+      state.sid = action.payload
+      state.sidIsError = false
+      state.isLocalStorage = true
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchSessionId.fulfilled, (state, action) => {
       state.sid = action.payload
@@ -56,6 +72,9 @@ const sessionSlice = createSlice({
     builder.addCase(rateMovieOnApi.fulfilled, (state) => {
       state.isRatedMoviesStale = true
     })
+    builder.addCase(deleteMovieRatingOnApi.fulfilled, (state) => {
+      state.isRatedMoviesStale = true
+    })
   }
 })
 
@@ -63,7 +82,14 @@ export const selectSession: SelectSession = (state: RootState) => state.session
 
 type SelectSession = (state: RootState) => typeof initialState
 
-export { fetchSessionId, fetchRatedMovies, rateMovieOnApi }
+export {
+  fetchSessionId,
+  fetchRatedMovies,
+  rateMovieOnApi,
+  deleteMovieRatingOnApi
+}
+
+export const { loadSidFromStorage } = sessionSlice.actions
 
 export const { reducer: sessionReducer } = sessionSlice
 

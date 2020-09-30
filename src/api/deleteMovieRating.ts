@@ -4,11 +4,8 @@ const urlEndpoint = `${API_BASE_URL}movie/`
 
 ;('https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=ed183a97f2ed86e8d5f403f1d25abc0a')
 
-const deleteMovieRating: DeleteMovieRating = async function ({
-  id,
-  guest_session_id
-}) {
-  const requestUrl = `${urlEndpoint}${id}/rating?api_key=${API_KEY}&guest_session_id=${guest_session_id}`
+const deleteMovieRating: DeleteMovieRating = async function ({ movieId, sid }) {
+  const requestUrl = `${urlEndpoint}${movieId}/rating?api_key=${API_KEY}&guest_session_id=${sid}`
   return await fetch(requestUrl, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -21,9 +18,9 @@ const deleteMovieRating: DeleteMovieRating = async function ({
 
 export { deleteMovieRating }
 
-interface Props {
-  id: string
-  guest_session_id: string
+export interface DeleteMovieRatingProps {
+  movieId: string
+  sid: string
 }
 
-type DeleteMovieRating = (options: Props) => Promise<boolean>
+type DeleteMovieRating = (options: DeleteMovieRatingProps) => Promise<boolean>
