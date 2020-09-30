@@ -26,16 +26,18 @@ export function useSession(session: SessionSlice, dispatch: AppDispatch): void {
       }
     }
 
-    if (session.sid)
+    if (session.sid) {
       if (!session.isLocalStorage && isLocalStorageAvailable()) {
         const sid = localStorage.getItem('sid')
         if (!sid) localStorage.setItem('sid', session.sid)
       }
-    if (session.isRatedMoviesStale) {
-      setTimeout(() => {
-        // delay fetch to give server the time to store a new rating before returning all the rated movies (when responding to user initiated rate / deleteRating)
-        dispatch(fetchRatedMovies(session.sid))
-      }, 500)
+      if (session.isRatedMoviesStale) {
+        setTimeout(() => {
+          // delay fetch to give server the time to store a new rating before returning all the rated movies (when responding to user initiated rate / deleteRating)
+          console.log(session.sid)
+          dispatch(fetchRatedMovies(session.sid))
+        }, 500)
+      }
     }
   }, [session.sid, session.isRatedMoviesStale])
 }
