@@ -27,6 +27,7 @@ const fetchMovieList: FetchMovieList = async function ({
       `&sort_by=${sortBy}.${sortOrder}` +
       `&page=${page}`
   )
+
   return await fetch(requestUrl)
     .then((res) => res.json())
     .then((res: MovieListResponse) => {

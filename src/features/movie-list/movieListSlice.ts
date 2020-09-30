@@ -5,6 +5,7 @@ import { RootState } from '../../store'
 
 const initialState: MovieListSlice = {
   data: [],
+  isStale: true,
   genres: [],
   apiConfig: {
     posterSize: 'w500',
@@ -45,14 +46,17 @@ const movieListSlice = createSlice({
   reducers: {
     loadMore(state) {
       state.queryOptions.page++
+      state.isStale = true
     },
     changeGenreFilter(state, action) {
       state.data = []
+      state.isStale = true
       state.queryOptions.includeGenres = action.payload.includeGenres
       state.queryOptions.excludeGenres = action.payload.excludeGenres
     },
     changeSortSetting(state, action) {
       state.data = []
+      state.isStale = true
       state.queryOptions.page = 1
       state.queryOptions.sortBy =
         action.payload.sortBy || state.queryOptions.sortBy
@@ -69,11 +73,13 @@ const movieListSlice = createSlice({
       state.isLoading = false
       state.isError = false
       state.isSuccess = true
+      state.isStale = false
     })
     builder.addCase(fetchMovies.rejected, (state) => {
       state.isLoading = false
       state.isError = true
       state.isSuccess = false
+      state.isStale = false
     })
     builder.addCase(fetchMovies.pending, (state) => {
       state.isLoading = true
@@ -124,6 +130,7 @@ export { fetchMovies, fetchAllGenres, movieListReducer }
 
 export interface MovieListSlice {
   data: MovieListResultObject[]
+  isStale: boolean
   genres: Genre[] | []
   apiConfig: {
     posterSize: string

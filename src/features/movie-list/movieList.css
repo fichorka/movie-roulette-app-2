@@ -3,6 +3,10 @@
     width: 20rem;
     height: 26rem;
   }
+
+  .card.card {
+    margin: 4rem;
+  }
 }
 
 .modal-container {
@@ -12,6 +16,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 11;
 }
 
 .modal {
@@ -191,48 +196,126 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  align-items: baseline;
 }
 
 .card {
   position: relative;
-  background: var(--bg-2);
-  margin: 3rem;
+  background: var(--bg-1);
+  box-shadow: 0 0 0.5rem 0 #777;
+  /* margin: 0; */
   border-radius: 0.3rem;
+  margin: 2rem;
   width: 16rem;
+  /* width: 80%; */
 }
 
 .card__rating {
   position: absolute;
-  right: -1em;
-  top: -1em;
-  line-height: 3em;
+  right: -1.2em;
+  top: -1.2em;
+  line-height: 3.2em;
   background: var(--bg-3);
-  width: 3em;
   text-align: center;
   font-size: 1.2rem;
-  border-radius: 50%;
+  border-radius: 1.6em;
   user-select: none;
   box-shadow: 0 0 0.5rem -0.1rem var(--shadow);
+  height: 3.2em;
+  width: 3.2em;
+  z-index: 10;
+  color: var(--text-col-1);
+  transition: color 0.5s;
+}
+
+.card__rating:empty {
+  color: transparent;
 }
 
 .card__image-container {
   width: 14rem;
   height: 16rem;
   margin: 1rem;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.image--fader {
+  width: 100%;
+  height: 100%;
   background: var(--bg-3);
+  position: absolute;
+  opacity: 1;
+  transition: opacity 0.5s 0.3s;
+}
+
+.card__poster-image ~ .image--fader.image--fader {
+  opacity: 0;
 }
 
 .card__poster-image {
+  position: absolute;
   text-align: center;
-  height: 16rem;
+  width: 100%;
   display: block;
 }
 
 .card__label {
   margin: 1rem 1rem 0.5rem 1rem;
   font-size: 1.2rem;
+  line-height: 1.2em;
+  opacity: 1;
+  transition: opacity 0.3s;
+  user-select: none;
+}
+
+.card__label:empty {
+  height: 1.2em;
+  opacity: 0;
 }
 
 .card__sub-label {
   margin: 0.5rem 1rem 1rem 1rem;
+  font-size: 1rem;
+  line-height: 1.2em;
+  opacity: 1;
+  transition: opacity 0.3s;
+  user-select: none;
+}
+
+.card__sub-label:empty {
+  height: 1.2em;
+  margin: 0.5rem 1rem 1rem 1rem;
+  opacity: 0;
+}
+
+.load-more-btn {
+  font-size: 1.2rem;
+  border: 0.2em solid var(--border-col);
+  box-sizing: border-box;
+  outline: none;
+  display: block;
+  color: var(--text-col-2);
+  width: 6em;
+  height: 6em;
+  line-height: 5.6em;
+  text-align: center;
+  margin: 2em auto;
+  user-select: none;
+  border-radius: 50%;
+  background: var(--bg-2);
+}
+.load-more-btn:disabled {
+  color: var(--text-col-3);
+}
+
+.load-more-btn:focus,
+.load-more-btn:hover {
+  border: 0.2em solid var(--focus-border-col);
+}
+
+.load-more-btn:active {
+  border: 0.3em solid var(--active-border-col);
+  line-height: 5.4em;
 }

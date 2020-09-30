@@ -5,7 +5,7 @@
 }
 
 :root {
-  font-size: 3.5vw;
+  font-size: 4.5vw;
   font-family: system-ui, Arial, sans-serif;
 
   /* custom propeties */
@@ -13,14 +13,19 @@
   --bg-2: #e0e0e0;
   --bg-3: #c8c8c8;
   --text-col: #121212;
+  --text-col-2: #484848;
+  --text-col-3: #808080;
   --shadow: #404040;
   --bg-on: rgb(235, 235, 256);
   --bg-off: rgb(256, 235, 235);
   --col-on: blue;
   --col-off: rgb(220, 0, 0);
+  --border-col: #808080;
+  --focus-border-col: #505050;
+  --active-border-col: #101010;
 }
 
 body {
   color: var(--text-col);
-  background: var(--bg-1);
+  background: var(--bg-2);
 }

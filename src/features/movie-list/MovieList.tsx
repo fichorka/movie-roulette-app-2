@@ -18,16 +18,18 @@ const MovieList: React.FC = () => {
 
   const movieListSlice = useSelector(selectMovieListSlice)
 
+  const { isLoading, isError, isSuccess, isStale } = movieListSlice
+
   const movies = useSelector(selectMovies)
 
-  const { isLoading, isError, isSuccess } = movieListSlice
+  const targetList = movies.length ? movies : [...Array(20)]
 
   useEffect(() => {
     // customHook for initial fetch
-    if (!movies.length && !movieListSlice.isLoading) {
+    if (isStale) {
       dispatch(fetchMovies(movieListSlice.queryOptions))
     }
-  }, [movies])
+  }, [isStale])
 
   return (
     <div>
@@ -43,37 +45,28 @@ const MovieList: React.FC = () => {
       </button>
       <MovieFilters />
       <div className="movie-list">
-        {movies &&
-          movies.map((m) => (
-            <MovieCard
-              key={m.id}
-              title={m.title}
-              imageUrl={m.poster_path}
-              release_date={m.release_date}
-              language={m.original_language}
-              rating={m.vote_average}
-            />
-          ))}
-        {isLoading && <div>Loading...</div>}
-        {isError && <div>Network error...</div>}
-        <button
-          onClick={() => {
-            if (isSuccess) {
-              dispatch({ type: 'movieList/loadMore' })
-              dispatch(fetchMovies(movieListSlice.queryOptions))
-            }
-          }}
-        >
-          Load more
-        </button>
-        {ModalVisible && (
-          <RouletteModal
-            closeModal={() => {
-              setModalVisible(false)
-            }}
-          />
-        )}
+        {targetList &&
+          targetList.map((m, i) => <MovieCard key={i} movie={m} />)}
       </div>
+      <button
+        className="load-more-btn"
+        disabled={isLoading}
+        onClick={() => {
+          if (!isLoading) {
+            dispatch({ type: 'movieList/loadMore' })
+            // dispatch(fetchMovies(movieListSlice.queryOptions))
+          }
+        }}
+      >
+        {isLoading ? 'Loading' : isError ? 'Try again' : 'Load'}
+      </button>
+      {ModalVisible && (
+        <RouletteModal
+          closeModal={() => {
+            setModalVisible(false)
+          }}
+        />
+      )}
     </div>
   )
 }
