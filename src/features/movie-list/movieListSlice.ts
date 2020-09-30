@@ -6,6 +6,11 @@ import { RootState } from '../../store'
 const initialState: MovieListSlice = {
   data: [],
   genres: [],
+  apiConfig: {
+    posterSize: 'w500',
+    backdropSize: 'original',
+    baseUrl: 'http://image.tmdb.org/t/p/'
+  },
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -98,12 +103,15 @@ const selectMovies: SelectMovies = (state) => state.movieList.data
 
 const selectGenres: SelectGenres = (state) => state.movieList.genres
 
+const selectApiConfig: SelectApiConfig = (state) => state.movieList.apiConfig
+
 const selectMovieListQueryOptions: SelectMovieListQueryOptions = (state) =>
   state.movieList.queryOptions
 
 export {
   selectMovies,
   selectGenres,
+  selectApiConfig,
   selectMovieListSlice,
   selectMovieListQueryOptions
 }
@@ -117,6 +125,11 @@ export { fetchMovies, fetchAllGenres, movieListReducer }
 export interface MovieListSlice {
   data: MovieListResultObject[]
   genres: Genre[] | []
+  apiConfig: {
+    posterSize: string
+    backdropSize: string
+    baseUrl: string
+  }
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
@@ -126,6 +139,8 @@ export interface MovieListSlice {
 type SelectMovies = (state: RootState) => MovieListResultObject[]
 
 type SelectGenres = (state: RootState) => Genre[] | []
+
+type SelectApiConfig = (state: RootState) => typeof initialState.apiConfig
 
 type SelectMovieListSlice = (state: RootState) => MovieListSlice
 

@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectApiConfig } from '.'
 
 export const MovieCard: React.FC<Props> = ({
   imageUrl,
@@ -7,12 +9,14 @@ export const MovieCard: React.FC<Props> = ({
   language,
   rating
 }: Props) => {
+  const { posterSize, baseUrl } = useSelector(selectApiConfig)
+
   return (
     <div className="card">
       <div className="card__rating">{rating}</div>
       <div className="card__image-container">
         <img
-          src={imageUrl}
+          src={`${baseUrl}${posterSize}${imageUrl}`}
           alt={'Poster image for movie ' + title}
           className="card__poster-image"
         />
