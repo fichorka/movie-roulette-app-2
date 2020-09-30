@@ -12,12 +12,7 @@ export function useSession(session: SessionSlice, dispatch: AppDispatch): void {
 
   useEffect(() => {
     if (!session.sid && isLocalStorageAvailable()) dispatch(fetchSessionId())
-    if (
-      session.sid &&
-      // session.isRatedMoviesStale &&
-      // !session.isRatedMoviesLoading &&
-      !session.isRatedMoviesError
-    )
+    if (session.sid && !session.isRatedMoviesError)
       dispatch(fetchRatedMovies(session.sid))
   }, [session.sid])
 }
