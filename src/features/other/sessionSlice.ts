@@ -27,10 +27,10 @@ const rateMovieOnApi = createAsyncThunk(
 const initialState = {
   sid: '',
   ratedMovies: [],
-  sidIsLoading: false,
+  // sidIsLoading: false,
   sidIsError: false,
-  isRatedMoviesLoading: false,
-  isRatedMoviesStale: true,
+  // isRatedMoviesLoading: false,
+  // isRatedMoviesStale: true,
   isRatedMoviesError: false
 }
 
@@ -45,28 +45,22 @@ const sessionSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSessionId.fulfilled, (state, action) => {
       state.sid = action.payload
-      state.sidIsLoading = false
       state.sidIsError = false
-      state.isRatedMoviesStale = true
-    })
-    builder.addCase(fetchSessionId.pending, (state) => {
-      state.sidIsLoading = true
-      state.sidIsError = false
+      // state.isRatedMoviesStale = true
     })
     builder.addCase(fetchSessionId.rejected, (state) => {
       state.sidIsError = true
-      state.sidIsLoading = false
     })
     builder.addCase(fetchRatedMovies.fulfilled, (state, action) => {
       state.ratedMovies = action.payload
-      state.isRatedMoviesStale = false
+      // state.isRatedMoviesStale = false
     })
-    builder.addCase(fetchRatedMovies.pending, (state) => {
-      state.isRatedMoviesLoading = true
-      state.isRatedMoviesError = false
-    })
+    // builder.addCase(fetchRatedMovies.pending, (state) => {
+    //   state.isRatedMoviesLoading = true
+    //   state.isRatedMoviesError = false
+    // })
     builder.addCase(fetchRatedMovies.rejected, (state) => {
-      state.isRatedMoviesLoading = false
+      // state.isRatedMoviesLoading = false
       state.isRatedMoviesError = true
     })
   }

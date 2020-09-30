@@ -1,9 +1,9 @@
 import { API_BASE_URL, API_KEY } from '../../config'
 
-const urlEndpoint = `${API_BASE_URL}authentication/guest_session/new`
+const urlEndpoint = `${API_BASE_URL}authentication/guest_session/new?api_key=${API_KEY}`
 
 const fetchNewGuestSessionId: FetchNewGuestSessionId = async function () {
-  const requestUrl = urlEndpoint + `?${API_KEY}`
+  const requestUrl = urlEndpoint
   return await fetch(requestUrl)
     .then((res) => res.json())
     .then((res: NewGuestSessionResponse) => {
