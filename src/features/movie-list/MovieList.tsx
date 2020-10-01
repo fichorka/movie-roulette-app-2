@@ -11,6 +11,7 @@ import {
   selectMovies,
   tryFetchAgain
 } from './movieListSlice'
+import { LoadBtn } from '../movie-details/LoadBtn'
 
 const MovieList: React.FC = () => {
   const [ModalVisible, setModalVisible] = useState(false)
@@ -19,7 +20,7 @@ const MovieList: React.FC = () => {
 
   const movieListSlice = useSelector(selectMovieListSlice)
 
-  const { isLoading, isError, isSuccess, isStale } = movieListSlice
+  const { isLoading, isError, isStale } = movieListSlice
 
   const movies = useSelector(selectMovies)
 
@@ -34,27 +35,12 @@ const MovieList: React.FC = () => {
 
   return (
     <div>
-      <button
-        className="float-btn float-btn--modal"
-        onClick={() => setModalVisible(!ModalVisible)}
-      ></button>
       <MovieFilters />
       <div className="movie-list">
         {targetList &&
           targetList.map((m, i) => <MovieCard key={i} movie={m} />)}
       </div>
-      <button
-        className="float-btn"
-        disabled={isLoading}
-        onClick={() => {
-          if (!isLoading) {
-            if (isError) dispatch(tryFetchAgain())
-            else dispatch(loadMore())
-          }
-        }}
-      >
-        {isLoading ? 'Loading' : isError ? 'Try again' : 'Load'}
-      </button>
+      <LoadBtn isLoading={isLoading} isError={isError} />
       {ModalVisible && (
         <RouletteModal
           closeModal={() => {
@@ -62,6 +48,10 @@ const MovieList: React.FC = () => {
           }}
         />
       )}
+      <button
+        className="float-btn float-btn--modal"
+        onClick={() => setModalVisible(!ModalVisible)}
+      ></button>
     </div>
   )
 }

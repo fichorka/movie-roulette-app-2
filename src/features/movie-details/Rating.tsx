@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { MovieListResultObject } from '../../api/types'
+import { MovieDetailsApi } from '../../api'
 import {
   deleteMovieRatingOnApi,
   rateMovieOnApi,
@@ -8,10 +8,10 @@ import {
   selectSession
 } from '../other'
 
-const Rating: React.FC<MovieListResultObject> = ({
+const Rating: React.FC<{ movie: MovieDetailsApi }> = ({
   movie
 }: {
-  movie: MovieListResultObject
+  movie: MovieDetailsApi
 }) => {
   const dispatch = useDispatch()
   const ownRating = useSelector(selectOwnMovieRating)(movie?.id)

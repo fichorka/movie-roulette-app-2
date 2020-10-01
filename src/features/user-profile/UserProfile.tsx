@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { MovieCard } from '../movie-list/MovieCard'
 import { selectSession } from '../other'
-import './userProfile.css'
 
 const UserProfile: React.FC = () => {
   const { ratedMovies } = useSelector(selectSession)
