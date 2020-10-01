@@ -8,6 +8,7 @@ import { YoutubeEmbed } from './YoutubeEmbed'
 import { Rating } from './Rating'
 import { Cast } from './Cast'
 import { Crew } from './Crew'
+import { PageLayout } from '../../layouts'
 
 const MovieDetails: React.FC = () => {
   const { movieId }: MovieDetailsParams = useParams()
@@ -33,14 +34,9 @@ const MovieDetails: React.FC = () => {
   }, [!movie, movieId])
 
   return (
-    <div>
-      <Link to="/" className="nav-btn">
-        {'<'} back
-      </Link>
-      <h1 className="page-title">
-        {movie && movie?.title + ` (${movie?.release_date.split('-')[0]})`}
-      </h1>
-
+    <PageLayout
+      title={movie && movie?.title + ` (${movie?.release_date.split('-')[0]})`}
+    >
       <div className="backdrop-container">
         {movie && (
           <img
@@ -122,7 +118,7 @@ const MovieDetails: React.FC = () => {
       )}
       {movie?.credits?.cast && <Cast cast={movie.credits.cast} />}
       {movie?.credits?.crew && <Crew crew={movie.credits.crew} />}
-    </div>
+    </PageLayout>
   )
 }
 

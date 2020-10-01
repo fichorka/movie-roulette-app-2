@@ -79,17 +79,22 @@ body {
   background: var(--bg-3);
   text-decoration: none;
   color: var(--col-text);
+  user-select: none;
 }
 
 .nav-btn:hover {
   filter: brightness(0.9);
 }
 
+.page-bar {
+  display: flex;
+}
+
 .page-title {
   font-size: 1.2rem;
   line-height: 3rem;
   margin: 0 1rem 0;
-  display: inline-block;
+  display: block;
 }
 
 .page-meta {
