@@ -12,6 +12,7 @@ import { PageLayout } from '../../layouts'
 
 const MovieDetails: React.FC = () => {
   const { movieId }: MovieDetailsParams = useParams()
+  const [isError, setIsError] = useState(false)
 
   const dispatch = useDispatch()
   const movie = useSelector(selectMovie)(parseInt(movieId, 10))
@@ -40,12 +41,16 @@ const MovieDetails: React.FC = () => {
       <div className="backdrop-container">
         {movie && (
           <img
+            onError={() => {
+              setIsError(true)
+            }}
+            style={isError ? { display: 'none' } : {}}
             className="backdrop__image"
             src={`${baseUrl}${backdropSize}/${movie.backdrop_path}`}
           />
         )}
         <div className="image--fader"></div>
-        {movie && (
+        {movie?.overview && (
           <div className="overview overview--wide">{movie.overview}</div>
         )}
       </div>

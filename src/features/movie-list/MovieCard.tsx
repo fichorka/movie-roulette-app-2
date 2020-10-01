@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { selectApiConfig } from '.'
@@ -6,6 +6,7 @@ import { MovieListResultObject } from '../../api/types'
 
 export const MovieCard: React.FC<Props> = ({ movie }: Props) => {
   const { baseUrl, posterSize } = useSelector(selectApiConfig)
+  const [isError, setIsError] = useState(false)
 
   return (
     <Link to={movie ? `/${movie.id}` : ''} className="card">
@@ -13,6 +14,10 @@ export const MovieCard: React.FC<Props> = ({ movie }: Props) => {
       <div className="card__image-container">
         {movie && (
           <img
+            onError={() => {
+              setIsError(true)
+            }}
+            style={isError ? { display: 'none' } : {}}
             src={`${baseUrl}${posterSize}/${movie.poster_path}`}
             className="card__poster-image"
           />
