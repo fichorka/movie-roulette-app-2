@@ -16,23 +16,19 @@ on page load:
 
 ### Home page
 
-route: `/?genres[]=:genreId&genre[]=:genreId&genre_behavior=includes|without` _(use **query-string** library)_
+route: `/`
 
-- if no genres selected, open **roullete modal**
 - List Movies, show load/error indication
 - Display filter and sort settings at the top
 - User can remove selected genres from filter by clicking 'x' near the label of each genre name
 - Available sort settings through dropdown menu: title, popularity(default), release date, rating, vote count, and thee order: asc \ desc(default)
 - LOAD button loads more movies
-- use url query parameters for filter and sort settings
 
 ### MovieDetails page
 
 route: `/:id/`
 
 - Fields: title, cover image, year, description, rating popularity, language and production companies, video, genres, cast and crew
-- User can click on one of film's genres, which takes him to a Home page with selected genre as a filter
-- User can click on cast / crew member and see its details
 - Can rate a movie (use guest_session_id)
 - If already rated, show user rating and option to delete the rating
 
