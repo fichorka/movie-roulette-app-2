@@ -14,7 +14,6 @@ export const MovieCard: React.FC<Props> = ({ movie }: Props) => {
         {movie && (
           <img
             src={`${baseUrl}${posterSize}/${movie.poster_path}`}
-            alt={'Poster image for movie ' + movie.title}
             className="card__poster-image"
           />
         )}

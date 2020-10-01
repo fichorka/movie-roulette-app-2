@@ -337,6 +337,7 @@ img ~ .image--fader.image--fader {
   user-select: none;
   border-radius: 50%;
   background: var(--bg-2);
+  cursor: pointer;
 }
 .float-btn:disabled {
   color: var(--text-col-3);

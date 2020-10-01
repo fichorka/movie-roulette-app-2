@@ -42,7 +42,6 @@ const MovieDetails: React.FC = () => {
           <img
             className="backdrop__image"
             src={`${baseUrl}${backdropSize}/${movie.backdrop_path}`}
-            alt={`Image from ${movie.title} movie`}
           />
         )}
         <div className="image--fader"></div>
