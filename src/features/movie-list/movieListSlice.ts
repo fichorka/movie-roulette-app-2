@@ -48,6 +48,9 @@ const movieListSlice = createSlice({
       state.queryOptions.page++
       state.isStale = true
     },
+    tryFetchAgain(state) {
+      state.isStale = true
+    },
     changeGenreFilter(state, action) {
       state.data = []
       state.isStale = true
@@ -100,7 +103,8 @@ export const {
   loadMore,
   changeGenreFilter,
   changeSortSetting,
-  updateGenreSelection
+  updateGenreSelection,
+  tryFetchAgain
 } = movieListSlice.actions
 
 // Selectors

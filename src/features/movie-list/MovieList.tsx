@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { MovieFilters } from './MovieFilters'
 import { RouletteModal } from './RouletteModal'
 import './movieList.css'
@@ -7,8 +6,10 @@ import { MovieCard } from './MovieCard'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchMovies,
+  loadMore,
   selectMovieListSlice,
-  selectMovies
+  selectMovies,
+  tryFetchAgain
 } from './movieListSlice'
 
 const MovieList: React.FC = () => {
@@ -47,8 +48,8 @@ const MovieList: React.FC = () => {
         disabled={isLoading}
         onClick={() => {
           if (!isLoading) {
-            dispatch({ type: 'movieList/loadMore' })
-            // dispatch(fetchMovies(movieListSlice.queryOptions))
+            if (isError) dispatch(tryFetchAgain())
+            else dispatch(loadMore())
           }
         }}
       >
