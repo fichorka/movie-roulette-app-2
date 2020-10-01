@@ -55,9 +55,7 @@ const MovieDetails: React.FC = () => {
         )}
       </div>
 
-      {movie && (
-        <div className="overview overview--narrow"> && movie.overview</div>
-      )}
+      {movie && <div className="overview overview--narrow">movie.overview</div>}
 
       {movie && (
         <>
