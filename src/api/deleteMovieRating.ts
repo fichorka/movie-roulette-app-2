@@ -19,7 +19,7 @@ const deleteMovieRating: DeleteMovieRating = async function ({ movieId, sid }) {
 export { deleteMovieRating }
 
 export interface DeleteMovieRatingProps {
-  movieId: string
+  movieId: string | number
   sid: string
 }
 

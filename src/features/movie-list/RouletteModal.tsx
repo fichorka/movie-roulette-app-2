@@ -61,19 +61,21 @@ export const RouletteModal: React.FC<Props> = ({ closeModal }: Props) => {
   const includedGenres = queryOptions.includeGenres.slice()
   const excludedGenres = queryOptions.excludeGenres.slice()
 
-  genres.map((g) => {
-    // transform genres clone with included / excluded indicators
-    if (includedGenres.filter((included) => included.id === g.id).length) {
-      g.included = true
-      g.excluded = false
-      return g
-    }
-    if (excludedGenres.filter((excluded) => excluded.id === g.id).length) {
-      g.included = false
-      g.excluded = true
-      return g
-    }
-  })
+  // genres.map((g) => {
+  //   // transform genres clone with included / excluded indicators
+  //   if (includedGenres.filter((included) => included.id === g.id).length) {
+  //     g.included = true
+  //     g.excluded = false
+  //     return g
+  //   }
+  //   if (excludedGenres.filter((excluded) => excluded.id === g.id).length) {
+  //     g.included = false
+  //     g.excluded = true
+  //     return g
+  //   } else {
+  //     return g
+  //   }
+  // })
 
   return (
     <div className="modal-container">
@@ -96,6 +98,7 @@ export const RouletteModal: React.FC<Props> = ({ closeModal }: Props) => {
                 excludeGenres: genres.filter((g) => g.excluded)
               })
             )
+            closeModal()
           }}
         >
           Roll

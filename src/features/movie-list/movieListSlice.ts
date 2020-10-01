@@ -51,8 +51,10 @@ const movieListSlice = createSlice({
     changeGenreFilter(state, action) {
       state.data = []
       state.isStale = true
-      state.queryOptions.includeGenres = action.payload.includeGenres
-      state.queryOptions.excludeGenres = action.payload.excludeGenres
+      state.queryOptions.includeGenres =
+        action.payload.includeGenres || state.queryOptions.includeGenres
+      state.queryOptions.excludeGenres =
+        action.payload.excludeGenres || state.queryOptions.excludeGenres
     },
     changeSortSetting(state, action) {
       state.data = []

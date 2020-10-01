@@ -80,7 +80,16 @@ const sessionSlice = createSlice({
 
 export const selectSession: SelectSession = (state: RootState) => state.session
 
+export const selectOwnMovieRating: SelectOwnMovieRating = (
+  state: RootState
+) => (movieId) =>
+  state.session.ratedMovies.filter((rated) => rated.id === movieId)[0]?.rating
+
 type SelectSession = (state: RootState) => typeof initialState
+
+type SelectOwnMovieRating = (
+  state: RootState
+) => (movieId: string | number) => number | undefined
 
 export {
   fetchSessionId,

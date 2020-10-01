@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { selectApiConfig } from '.'
 import { MovieListResultObject } from '../../api/types'
 
@@ -7,7 +8,7 @@ export const MovieCard: React.FC<Props> = ({ movie }: Props) => {
   const { baseUrl, posterSize } = useSelector(selectApiConfig)
 
   return (
-    <div className="card">
+    <Link to={movie ? `/${movie.id}` : ''} className="card">
       <div className="card__rating">{movie?.vote_average}</div>
       <div className="card__image-container">
         {movie && (
@@ -27,7 +28,7 @@ export const MovieCard: React.FC<Props> = ({ movie }: Props) => {
       <div className="card__sub-label">
         {movie && 'Language: ' + movie.original_language}
       </div>
-    </div>
+    </Link>
   )
 }
 

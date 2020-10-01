@@ -41,13 +41,22 @@ interface VideoResponseApi {
   results?: Array<{
     key?: string
     site?: string
+    name: string
   }>
 }
 
 interface Credits {
-  cast: {
-    name: string
-    character: string
-    order: number
-  }[]
+  cast: Cast[]
+  crew: Crew[]
+}
+
+export interface Cast {
+  name: string
+  character: string
+  order: number
+}
+
+export interface Crew {
+  name: number
+  job: string
 }

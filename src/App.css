@@ -10,6 +10,7 @@
 
   /* custom propeties */
   --bg-1: #f8f8f8;
+  --bg-1-trans: #f8f8f8c0;
   --bg-2: #e0e0e0;
   --bg-3: #c8c8c8;
   --bg-dark-1: #404040;
@@ -45,6 +46,7 @@ body {
   letter-spacing: 0.1em;
   color: var(--text-col-3);
   font-weight: bold;
+  user-select: none;
 }
 
 .profile-icon {

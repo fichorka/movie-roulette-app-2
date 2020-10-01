@@ -22,7 +22,7 @@ const rateMovie: RateMovie = async function ({ movieId, sid, rating }) {
 export { rateMovie }
 
 export interface RateMovieProps {
-  movieId: string
+  movieId: string | number
   sid: string
   rating: number
 }
