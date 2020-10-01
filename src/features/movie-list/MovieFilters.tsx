@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectMovieListQueryOptions, changeSortSetting } from './'
-import { changeGenreFilter, updateGenreSelection } from './movieListSlice'
+import { changeGenreFilter } from './movieListSlice'
 
 const MovieFilters: React.FC = () => {
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ const MovieFilters: React.FC = () => {
           ['popularity', 'Popularity'],
           ['vote_average', 'Rating'],
           ['release_date', 'Release date'],
-          ['vote_count', 'Cote count'],
+          ['vote_count', 'Vote count'],
           ['original_title', 'Title']
         ].map((filter) => (
           <option key={filter[0]} value={filter[0]}>
