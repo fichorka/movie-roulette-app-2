@@ -6,15 +6,16 @@ import { MovieCard } from './MovieCard'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchMovies,
-  loadMore,
+  selectGenres,
   selectMovieListSlice,
-  selectMovies,
-  tryFetchAgain
+  selectMovies
 } from './movieListSlice'
 import { LoadBtn } from '../movie-details/LoadBtn'
 
 const MovieList: React.FC = () => {
   const [ModalVisible, setModalVisible] = useState(false)
+
+  const genres = useSelector(selectGenres)
 
   const dispatch = useDispatch()
 
@@ -29,7 +30,13 @@ const MovieList: React.FC = () => {
   useEffect(() => {
     // customHook for initial fetch
     if (isStale) {
-      dispatch(fetchMovies(movieListSlice.queryOptions))
+      dispatch(
+        fetchMovies({
+          ...movieListSlice.queryOptions,
+          includeGenres: genres.filter((g) => g.included),
+          excludeGenres: genres.filter((g) => g.excluded)
+        })
+      )
     }
   }, [isStale])
 

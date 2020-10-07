@@ -1,13 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectMovieListQueryOptions, changeSortSetting } from './'
-import { changeGenreFilter } from './movieListSlice'
+import { refetch, selectGenres, updateGenreSelection } from './movieListSlice'
 
 const MovieFilters: React.FC = () => {
   const dispatch = useDispatch()
-  const { includeGenres, excludeGenres } = useSelector(
-    selectMovieListQueryOptions
-  )
+  const genres = useSelector(selectGenres)
 
   const { sortOrder, sortBy } = useSelector(selectMovieListQueryOptions)
 
@@ -46,40 +44,32 @@ const MovieFilters: React.FC = () => {
         <option value="asc">ascending</option>
         <option value="desc">descending</option>
       </select>
-      {includeGenres.map((genre, i) => (
-        <div
-          key={genre.id}
-          className="sort-order-option included"
-          onClick={() => {
-            const genresClone = includeGenres.slice()
-            genresClone.splice(i, 1)
-            dispatch(
-              changeGenreFilter({
-                includeGenres: genresClone
+      {genres
+        .filter((genre) => genre.included || genre.excluded)
+        .map((g) => (
+          <div
+            key={g.id}
+            className={`sort-order-option ${
+              g.included ? 'included' : 'excluded'
+            }`}
+            onClick={() => {
+              const genresClone = genres.map((g2) => {
+                if (g2.id === g.id) {
+                  return {
+                    ...g2,
+                    included: false,
+                    excluded: false
+                  }
+                }
+                return g2
               })
-            )
-          }}
-        >
-          {genre.name} x
-        </div>
-      ))}
-      {excludeGenres.map((genre, i) => (
-        <div
-          key={genre.id}
-          className="sort-order-option excluded"
-          onClick={() => {
-            const genresClone = excludeGenres.slice()
-            genresClone.splice(i, 1)
-            dispatch(
-              changeGenreFilter({
-                excludeGenres: genresClone
-              })
-            )
-          }}
-        >
-          {genre.name} x
-        </div>
-      ))}
+              dispatch(updateGenreSelection(genresClone))
+              dispatch(refetch())
+            }}
+          >
+            {g.name} x
+          </div>
+        ))}
     </div>
   )
 }

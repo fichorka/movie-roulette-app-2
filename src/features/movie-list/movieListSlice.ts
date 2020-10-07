@@ -16,8 +16,6 @@ const initialState: MovieListSlice = {
   isError: false,
   isSuccess: false,
   queryOptions: {
-    includeGenres: [],
-    excludeGenres: [],
     sortBy: 'popularity',
     sortOrder: 'desc',
     page: 1
@@ -51,13 +49,10 @@ const movieListSlice = createSlice({
     tryFetchAgain(state) {
       state.isStale = true
     },
-    changeGenreFilter(state, action) {
+    refetch(state) {
       state.data = []
+      state.queryOptions.page = 1
       state.isStale = true
-      state.queryOptions.includeGenres =
-        action.payload.includeGenres || state.queryOptions.includeGenres
-      state.queryOptions.excludeGenres =
-        action.payload.excludeGenres || state.queryOptions.excludeGenres
     },
     changeSortSetting(state, action) {
       state.data = []
@@ -101,10 +96,10 @@ const movieListSlice = createSlice({
 
 export const {
   loadMore,
-  changeGenreFilter,
   changeSortSetting,
   updateGenreSelection,
-  tryFetchAgain
+  tryFetchAgain,
+  refetch
 } = movieListSlice.actions
 
 // Selectors

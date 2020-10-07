@@ -27,12 +27,12 @@
 }
 
 .sort-order-option.included {
-  background: var(--bg-off);
+  background: var(--bg-on);
   cursor: pointer;
 }
 
 .sort-order-option.excluded {
-  background: var(--bg-on);
+  background: var(--bg-off);
   cursor: pointer;
 }
 
